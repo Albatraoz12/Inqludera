@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_types",
+  "info": {
+    "singularName": "job-type",
+    "pluralName": "job-types",
+    "displayName": "JobType",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "type": {
+      "type": "string"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "jobType"
+    }
+  }
+}

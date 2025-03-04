@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "rating": {
+      "type": "integer",
+      "max": 10,
+      "min": 0,
+      "required": true
+    },
+    "body": {
+      "type": "blocks",
+      "required": true
+    },
+    "jobType": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::job-type.job-type",
+      "inversedBy": "posts"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::location.location",
+      "mappedBy": "post"
+    }
+  }
+}
