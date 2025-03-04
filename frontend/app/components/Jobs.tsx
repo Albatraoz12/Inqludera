@@ -65,8 +65,8 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
       {/* 📋 Lista av jobb */}
       {currentJobs.length > 0 ? (
         currentJobs.map((job: any) => (
-          <Link href={`/find-jobs/${job.documentId}`}>
-            <div key={job.id} className='flex gap-3'>
+          <Link key={job.id} href={`/find-jobs/${job.documentId}`}>
+            <div className='flex gap-3'>
               <div className='h-[90px] w-[90px] bg-white text-black'>X</div>
               <div>
                 <p>{job.Title}</p>
