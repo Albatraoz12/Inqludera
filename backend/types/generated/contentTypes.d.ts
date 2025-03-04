@@ -479,6 +479,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     jobType: Schema.Attribute.Relation<'manyToOne', 'api::job-type.job-type'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
