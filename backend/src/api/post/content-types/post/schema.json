@@ -16,12 +16,6 @@
       "required": true,
       "unique": true
     },
-    "rating": {
-      "type": "integer",
-      "max": 10,
-      "min": 0,
-      "required": true
-    },
     "body": {
       "type": "blocks",
       "required": true
@@ -34,9 +28,9 @@
     },
     "location": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::location.location",
-      "mappedBy": "post"
+      "inversedBy": "posts"
     }
   }
 }
