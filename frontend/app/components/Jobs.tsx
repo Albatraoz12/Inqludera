@@ -16,11 +16,12 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
               <div className='flex gap-3 py-2'>
                 <i className='flex gap-3 items-center'>
                   <MapPin size={18} color='white' />
-                  {job.jobType.type}
+
+                  {job.location.location}
                 </i>
                 <i className='flex gap-3 items-center'>
                   <Briefcase size={18} color='white' />
-                  {job.location.location}
+                  {job.jobType.type}
                 </i>
               </div>
             </div>
