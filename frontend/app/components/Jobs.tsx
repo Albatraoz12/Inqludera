@@ -1,4 +1,5 @@
 'use client';
+import { Briefcase, MapPin } from 'lucide-react';
 import React, { useState } from 'react';
 
 export default function Jobs({ initialJobs }: { initialJobs: any }) {
@@ -12,9 +13,15 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
             <div className='h-[90px] w-[90px] bg-white text-black'>X</div>
             <div>
               <p>{job.Title}</p>
-              <div className='flex gap-3'>
-                <p>{job.jobType.type}</p>
-                <p>{job.location.location}</p>
+              <div className='flex gap-3 py-2'>
+                <i className='flex gap-3 items-center'>
+                  <MapPin size={18} color='white' />
+                  {job.jobType.type}
+                </i>
+                <i className='flex gap-3 items-center'>
+                  <Briefcase size={18} color='white' />
+                  {job.location.location}
+                </i>
               </div>
             </div>
           </div>
