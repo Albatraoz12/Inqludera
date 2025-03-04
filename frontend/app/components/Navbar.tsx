@@ -20,7 +20,7 @@ export default function Navbar() {
         </Link>
 
         <div className='hidden md:flex space-x-6'>
-          <Link href='#Lediga Jobb' className='hover:text-blue-500 text-white'>
+          <Link href='/find-jobs' className='hover:text-blue-500 text-white'>
             Lediga Jobb
           </Link>
           <Link href='#Tjänster' className='hover:text-blue-500 text-white'>
