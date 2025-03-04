@@ -2,30 +2,42 @@
 import { Briefcase, MapPin } from 'lucide-react';
 import React, { useState } from 'react';
 
+const JOBS_PER_PAGE = 10;
+
 export default function Jobs({ initialJobs }: { initialJobs: any }) {
   const [jobs, setJobs] = useState(initialJobs);
   const [filters, setFilters] = useState({ location: '', jobType: '' });
+  const [currentPage, setCurrentPage] = useState(1);
 
+  // Filtrera jobben baserat på användarens input
+  const filteredJobs = jobs.filter((job: any) => {
+    return (
+      (filters.location === '' ||
+        job.location.location
+          .toLowerCase()
+          .includes(filters.location.toLowerCase())) &&
+      (filters.jobType === '' ||
+        job.jobType.type.toLowerCase().includes(filters.jobType.toLowerCase()))
+    );
+  });
+
+  // Beräkna paginering
+  const totalPages = Math.ceil(filteredJobs.length / JOBS_PER_PAGE);
+  const startIndex = (currentPage - 1) * JOBS_PER_PAGE;
+  const currentJobs = filteredJobs.slice(
+    startIndex,
+    startIndex + JOBS_PER_PAGE
+  );
+
+  // Funktion för att hantera filterändringar
   const handleFilter = () => {
-    const filteredJobs = initialJobs.filter((job: any) => {
-      return (
-        (filters.location === '' ||
-          job.location.location
-            .toLowerCase()
-            .includes(filters.location.toLowerCase())) &&
-        (filters.jobType === '' ||
-          job.jobType.type
-            .toLowerCase()
-            .includes(filters.jobType.toLowerCase()))
-      );
-    });
-
-    setJobs(filteredJobs);
+    setCurrentPage(1); // Återställ till sida 1 vid filtrering
+    setJobs(initialJobs);
   };
 
   return (
     <div className='flex flex-col gap-10 py-10'>
-      {/* Filtersektion */}
+      {/* 🔍 Filtersektion */}
       <div className='flex gap-3'>
         <input
           type='text'
@@ -36,7 +48,7 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
         />
         <input
           type='text'
-          placeholder='Filtrera på jobbtitel...'
+          placeholder='Filtrera på job typ...'
           className='p-2 border rounded'
           value={filters.jobType}
           onChange={(e) => setFilters({ ...filters, jobType: e.target.value })}
@@ -49,9 +61,9 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
         </button>
       </div>
 
-      {/* Lista av jobb */}
-      {jobs && jobs.length > 0 ? (
-        jobs.map((job: any) => (
+      {/* 📋 Lista av jobb */}
+      {currentJobs.length > 0 ? (
+        currentJobs.map((job: any) => (
           <div key={job.id} className='flex gap-3'>
             <div className='h-[90px] w-[90px] bg-white text-black'>X</div>
             <div>
@@ -72,6 +84,29 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
       ) : (
         <p>Inga lediga tjänster för tillfället. Kontakta oss</p>
       )}
+
+      {/* 🔄 Paginering */}
+      <div className='flex justify-center gap-3 mt-5'>
+        <button
+          className='p-2 bg-gray-500 text-white rounded disabled:opacity-50'
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          Föregående
+        </button>
+        <span className='p-2'>
+          Sida {currentPage} av {totalPages}
+        </span>
+        <button
+          className='p-2 bg-gray-500 text-white rounded disabled:opacity-50'
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          disabled={currentPage === totalPages}
+        >
+          Nästa
+        </button>
+      </div>
     </div>
   );
 }

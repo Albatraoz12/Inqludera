@@ -4,7 +4,7 @@ import Jobs from '../components/Jobs';
 export default async function page() {
   const findJobs = await fetch('http://localhost:3001/api/posts?populate=*');
   const jobs = await findJobs.json();
-  console.log(jobs);
+
   return (
     <main className='min-h-[100vh]'>
       <header className='bg-gray-600'>
@@ -25,7 +25,7 @@ export default async function page() {
           </div>
         </div>
       </header>
-      <section className='max-w-[80vw] mx-auto py-10'>
+      <section className='max-w-[80vw] mx-auto my-10'>
         <h1 className='text-4xl'>Lediga tjänster</h1>
         <Jobs initialJobs={jobs.data} />
       </section>
