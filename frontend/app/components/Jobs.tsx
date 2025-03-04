@@ -1,5 +1,6 @@
 'use client';
 import { Briefcase, MapPin } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -65,12 +66,23 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
       {/* 📋 Lista av jobb */}
       {currentJobs.length > 0 ? (
         currentJobs.map((job: any) => (
-          <Link key={job.id} href={`/find-jobs/${job.documentId}`}>
+          <Link
+            key={job.id}
+            href={`/find-jobs/${job.documentId}`}
+            className='max-w-[500px]'
+          >
             <div className='flex gap-3'>
-              <div className='h-[90px] w-[90px] bg-white text-black'>X</div>
-              <div>
+              <div className='relative h-[90px] w-[90px] bg-white text-black'>
+                <Image
+                  src={`http://localhost:3001${job.Image.url}`}
+                  alt='hejsan'
+                  fill
+                  className='object-cover'
+                />
+              </div>
+              <div className='my-auto'>
                 <p>{job.Title}</p>
-                <div className='flex gap-3 py-2'>
+                <div className='flex gap-3 py-2 items-center'>
                   <i className='flex gap-3 items-center'>
                     <MapPin size={18} color='white' />
                     {job.location.location}
