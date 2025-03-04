@@ -1,5 +1,6 @@
 'use client';
 import { Briefcase, MapPin } from 'lucide-react';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const JOBS_PER_PAGE = 10;
@@ -64,22 +65,24 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
       {/* 📋 Lista av jobb */}
       {currentJobs.length > 0 ? (
         currentJobs.map((job: any) => (
-          <div key={job.id} className='flex gap-3'>
-            <div className='h-[90px] w-[90px] bg-white text-black'>X</div>
-            <div>
-              <p>{job.Title}</p>
-              <div className='flex gap-3 py-2'>
-                <i className='flex gap-3 items-center'>
-                  <MapPin size={18} color='white' />
-                  {job.location.location}
-                </i>
-                <i className='flex gap-3 items-center'>
-                  <Briefcase size={18} color='white' />
-                  {job.jobType.type}
-                </i>
+          <Link href={`/find-jobs/${job.documentId}`}>
+            <div key={job.id} className='flex gap-3'>
+              <div className='h-[90px] w-[90px] bg-white text-black'>X</div>
+              <div>
+                <p>{job.Title}</p>
+                <div className='flex gap-3 py-2'>
+                  <i className='flex gap-3 items-center'>
+                    <MapPin size={18} color='white' />
+                    {job.location.location}
+                  </i>
+                  <i className='flex gap-3 items-center'>
+                    <Briefcase size={18} color='white' />
+                    {job.jobType.type}
+                  </i>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))
       ) : (
         <p>Inga lediga tjänster för tillfället. Kontakta oss</p>
