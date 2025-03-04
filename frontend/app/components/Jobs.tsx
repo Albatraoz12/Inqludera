@@ -69,7 +69,7 @@ export default function Jobs({ initialJobs }: { initialJobs: any }) {
           <Link
             key={job.id}
             href={`/find-jobs/${job.documentId}`}
-            className='max-w-[500px]'
+            className='max-w-[600px]'
           >
             <div className='flex gap-3'>
               <div className='relative h-[90px] w-[90px] bg-white text-black'>
